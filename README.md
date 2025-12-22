@@ -4,7 +4,7 @@ Search keywords: Unity CI Templates, Unity CI/CD, Unity GitHub Actions, Unity au
 
 # 🚀 Unity CI/CD Pipeline
 📌 **Note:** This project was renamed from *Unity-CI-Templates* to *Unity-CI-CD*. Since I originally created it, the project has grown quite a bit beyond just a few CI-templates...
-The new name reflects *'Unity-CI-CD'* reflects better what it is now, and leaves room for where it’s headed next, and not just what it started as.
+The new name *'Unity-CI-CD'* reflects better what it is now, and leaves room for where it’s headed next, and not just what it started as.
 
 **Seamless testing, multi-platform builds, releases & deploys for Unity.**
 
