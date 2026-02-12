@@ -133,6 +133,7 @@ jobs:
     uses: avalin/unity-ci-templates/.github/workflows/prepare-metadata.yml@main
     with:
       runnerMain: ${{ needs.resolve_runners.outputs.main }}
+      runnerMacos: ${{ needs.resolve_runners.outputs.macos }}
       unityVersion: ${{ vars.UNITY_VERSION }}
       projectName: ${{ vars.PROJECT_NAME }}
       skipTests: ${{ inputs.skipTests }}
