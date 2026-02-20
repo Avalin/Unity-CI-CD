@@ -6,6 +6,9 @@ on:
       runnerMain:
         required: true
         type: string
+      unityVersion:
+        required: true
+        type: string
 
 jobs:
   activate-license:
@@ -25,6 +28,8 @@ jobs:
           UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
           UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+        with:
+          unityVersion: ${{ matrix.unityVersion }}
 
       - name: Upload Unity License File
         run: |

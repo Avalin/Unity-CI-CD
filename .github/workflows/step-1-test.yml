@@ -60,6 +60,7 @@ jobs:
     uses: ./.github/workflows/unity-license-uploader.yml
     with:
       runnerMain: ${{ inputs.runnerMain }}
+      unityVersion: ${{ inputs.unityVersion }}
     secrets:
       inherit
 
