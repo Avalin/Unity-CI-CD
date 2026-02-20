@@ -57,6 +57,12 @@ on:
       timeoutMinutesBuild:
         required: true
         type: string
+      checkFreeDiskSpace:
+        required: true
+        type: string
+      checkFreeDiskSpaceCustomTargets:
+        required: true
+        type: string
       buildTargets:
         required: true
         type: string
@@ -82,6 +88,7 @@ jobs:
         run: |
           BUILD_TARGETS=$(echo '${{ inputs.buildTargets }}' | jq -c '.')
           DEPLOY_TARGETS=$(echo '${{ inputs.validDeployTargets }}' | jq -c '.')
+          FREE_DISK_CUSTOM_TARGETS=$(echo '${{ inputs.checkFreeDiskSpaceCustomTargets }}' | jq -c '.')
       
           if [[ -z "$DEPLOY_TARGETS" || "$DEPLOY_TARGETS" == 'null' ]]; then
             DEPLOY_TARGETS='[]'
@@ -89,6 +96,10 @@ jobs:
       
           if [[ -z "$BUILD_TARGETS" || "$BUILD_TARGETS" == 'null' ]]; then
             BUILD_TARGETS='[]'
+          fi
+          
+          if [[ -z "$FREE_DISK_CUSTOM_TARGETS" || "$FREE_DISK_CUSTOM_TARGETS" == 'null' ]]; then
+            FREE_DISK_CUSTOM_TARGETS='[]'
           fi
       
           echo "# ⏳ Final Metadata Summary" >> $GITHUB_STEP_SUMMARY
@@ -130,5 +141,7 @@ jobs:
           echo "| Build Targets                | \`$BUILD_TARGETS\` |" >> $GITHUB_STEP_SUMMARY
           echo "| Deploy Targets               | \`$DEPLOY_TARGETS\` |" >> $GITHUB_STEP_SUMMARY
           echo "| Retention Days               | ${{ inputs.retentionDays }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Check Free Disk Space        | ${{ inputs.checkFreeDiskSpace }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Check Free Disk Space Auto Targets | \`$FREE_DISK_CUSTOM_TARGETS\` |" >> $GITHUB_STEP_SUMMARY
           echo "| Requires Combined Artifacts  | ${{ inputs.requiresCombined }} |" >> $GITHUB_STEP_SUMMARY
           echo "| Skip Per-Build-Target Artifacts | ${{ inputs.skipPerBuildTarget }} |" >> $GITHUB_STEP_SUMMARY

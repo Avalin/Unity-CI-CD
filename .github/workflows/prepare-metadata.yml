@@ -58,6 +58,10 @@ on:
         value: ${{ jobs.prepare_metadata.outputs.timeoutMinutesTests }}
       timeoutMinutesBuild:
         value: ${{ jobs.prepare_metadata.outputs.timeoutMinutesBuild }}
+      checkFreeDiskSpace:
+        value: ${{ jobs.prepare_metadata.outputs.checkFreeDiskSpace }}
+      checkFreeDiskSpaceCustomTargets:
+        value: ${{ jobs.prepare_metadata.outputs.checkFreeDiskSpaceCustomTargets }}
       quietMode:
         value: ${{ jobs.prepare_metadata.outputs.quietMode }}
       buildType:
@@ -89,6 +93,8 @@ jobs:
       buildType: ${{ steps.metadata.outputs.buildType }}
       buildTargets: ${{ steps.metadata.outputs.buildTargets }}
       deployTargets: ${{ steps.metadata.outputs.deployTargets }}
+      checkFreeDiskSpace: ${{ steps.metadata.outputs.checkFreeDiskSpace }}
+      checkFreeDiskSpaceCustomTargets: ${{ steps.metadata.outputs.checkFreeDiskSpaceCustomTargets }}
       requiresCombined: ${{ steps.metadata.outputs.requiresCombinedArtifact }}
       skipPerBuildTarget: ${{ steps.metadata.outputs.skipPerBuildTargetArtifact }}
       useGitLfs: ${{ steps.metadata.outputs.useGitLfs }}
@@ -205,6 +211,8 @@ jobs:
       retentionDays: ${{ needs.prepare_metadata.outputs.retentionDays }}
       timeoutMinutesTests: ${{ needs.prepare_metadata.outputs.timeoutMinutesTests }}
       timeoutMinutesBuild: ${{ needs.prepare_metadata.outputs.timeoutMinutesBuild }}
+      checkFreeDiskSpace: ${{ needs.prepare_metadata.outputs.checkFreeDiskSpace }}
+      checkFreeDiskSpaceCustomTargets: ${{ needs.prepare_metadata.outputs.checkFreeDiskSpaceCustomTargets }}
       buildTargets: ${{ needs.prepare_metadata.outputs.buildTargets }}
       validDeployTargets: ${{ needs.prepare_metadata.outputs.deployTargets || '[]' }}
       requiresCombined: ${{ needs.prepare_metadata.outputs.requiresCombined || false }}

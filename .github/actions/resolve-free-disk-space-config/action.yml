@@ -1,0 +1,29 @@
+name: Resolve Free Disk Space Config
+description: Resolves free disk space configuration (checkFreeDiskSpace and checkFreeDiskSpaceCustomTargets) from project defaults, action defaults, or other fallbacks.
+
+inputs:
+  projectDefaultsFile:
+    description: Path to project-level defaults.json
+    required: false
+    default: .github/config/defaults.json
+
+outputs:
+  checkFreeDiskSpace:
+    description: Resolved checkFreeDiskSpace value
+    value: ${{ steps.resolve.outputs.checkFreeDiskSpace }}
+  checkFreeDiskSpaceCustomTargets:
+    description: Resolved checkFreeDiskSpaceCustomTargets value
+    value: ${{ steps.resolve.outputs.checkFreeDiskSpaceCustomTargets }}
+
+runs:
+  using: composite
+  steps:
+    - id: resolve
+      name: Resolve Free Disk Space Checks
+      shell: bash
+      env:
+        PROJECT_DEFAULTS_FILE: ${{ inputs.projectDefaultsFile }}
+        ACTION_DEFAULTS_FILE:  ${{ github.action_path }}/defaults.json
+      run: |
+        chmod +x "${{ github.action_path }}/resolve-free-disk-space-config.sh"
+        bash "${{ github.action_path }}/resolve-free-disk-space-config.sh"

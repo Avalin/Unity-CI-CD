@@ -212,7 +212,20 @@ jobs:
               --arg retentionDays "${{ needs.prepare_metadata.outputs.retentionDays }}" \
               --arg timeoutMinutesTests "${{ needs.prepare_metadata.outputs.timeoutMinutesTests }}" \
               --arg timeoutMinutesBuild "${{ needs.prepare_metadata.outputs.timeoutMinutesBuild }}" \
-              '{projectName: $projectName, skipTests: $skipTests, testsOnly: $testsOnly, buildType: $buildType, buildVersion: $buildVersion, retentionDays: $retentionDays, timeoutMinutesTests: $timeoutMinutesTests, timeoutMinutesBuild: $timeoutMinutesBuild}')" \
+              --arg checkFreeDiskSpace "${{ needs.prepare_metadata.outputs.checkFreeDiskSpace }}" \
+              --argjson checkFreeDiskSpaceCustomTargets '${{ needs.prepare_metadata.outputs.checkFreeDiskSpaceCustomTargets }}' \
+              '{
+                projectName: $projectName,
+                skipTests: $skipTests,
+                testsOnly: $testsOnly,
+                buildType: $buildType,
+                buildVersion: $buildVersion,
+                retentionDays: $retentionDays,
+                timeoutMinutesTests: $timeoutMinutesTests,
+                timeoutMinutesBuild: $timeoutMinutesBuild,
+                checkFreeDiskSpace: $checkFreeDiskSpace,
+                checkFreeDiskSpaceCustomTargets: $checkFreeDiskSpaceCustomTargets
+              }')" \
             --field artifactConfig="$(jq -c -n \
               --arg requiresCombined "${{ needs.prepare_metadata.outputs.requiresCombined }}" \
               --arg skipPerBuildTarget "${{ needs.prepare_metadata.outputs.skipPerBuildTarget }}" \

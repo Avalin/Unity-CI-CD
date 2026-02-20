@@ -24,6 +24,12 @@ on:
       buildTargets:
         type: string
         required: false
+      checkFreeDiskSpace:
+        type: string
+        required: true
+      checkFreeDiskSpaceCustomTargets:
+        type: string
+        required: true
       timeoutMinutes:
         type: number
         required: false
@@ -105,8 +111,8 @@ jobs:
             Library-${{ matrix.buildTarget }}-
             Library-
 
-      - name: Check Free Disk Space (Android only)
-        if: matrix.buildTarget == 'Android'
+      - name: Check Free Disk Space
+        if: ${{ inputs.checkFreeDiskSpace == 'always' || (inputs.checkFreeDiskSpace == 'custom' && contains(fromJson(inputs.checkFreeDiskSpaceCustomTargets), matrix.buildTarget)) }}
         uses: jlumbroso/free-disk-space@v1.3.1
 
       - name: Resolve Build Profile

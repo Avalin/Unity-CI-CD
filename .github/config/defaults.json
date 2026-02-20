@@ -39,7 +39,9 @@
       "StandaloneWindows64",
       "StandaloneOSX",
       "iOS"
-    ]
+    ],
+    "checkFreeDiskSpace": "always",
+    "checkFreeDiskSpaceCustomTargets": ["Android"]
   },
   "deploy": {
     "defaultTargets": [

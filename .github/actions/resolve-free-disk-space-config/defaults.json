@@ -1,0 +1,6 @@
+{
+  "build": {
+    "checkFreeDiskSpace": "custom",
+    "checkFreeDiskSpaceCustomTargets": ["Android"]
+  }
+}

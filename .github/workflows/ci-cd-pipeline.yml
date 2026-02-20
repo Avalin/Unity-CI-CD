@@ -52,6 +52,8 @@ jobs:
       playModePath: ${{ steps.unpack.outputs.playModePath }}
       timeoutMinutesTests: ${{ steps.unpack.outputs.timeoutMinutesTests }}
       timeoutMinutesBuild: ${{ steps.unpack.outputs.timeoutMinutesBuild }}
+      checkFreeDiskSpace: ${{ steps.unpack.outputs.checkFreeDiskSpace }}
+      checkFreeDiskSpaceCustomTargets: ${{ steps.unpack.outputs.checkFreeDiskSpaceCustomTargets }}
       quietMode: ${{ steps.unpack.outputs.quietMode }}
     steps:
       - id: unpack
@@ -76,6 +78,8 @@ jobs:
           echo "retentionDays=$(echo "$meta" | jq -r .retentionDays)" >> "$GITHUB_OUTPUT"
           echo "timeoutMinutesTests=$(echo "$meta" | jq -r .timeoutMinutesTests)" >> "$GITHUB_OUTPUT"
           echo "timeoutMinutesBuild=$(echo "$meta" | jq -r .timeoutMinutesBuild)" >> "$GITHUB_OUTPUT"
+          echo "checkFreeDiskSpace=$(echo "$meta" | jq -r .checkFreeDiskSpace)" >> "$GITHUB_OUTPUT"
+          echo "checkFreeDiskSpaceCustomTargets=$(echo "$meta" | jq -c .checkFreeDiskSpaceCustomTargets)" >> "$GITHUB_OUTPUT"
 
           # Artifacts Config
           echo "requiresCombined=$(echo "$artifact" | jq -r .requiresCombined)" >> "$GITHUB_OUTPUT"
@@ -127,6 +131,8 @@ jobs:
       combineArtifacts: ${{ needs.unpack_inputs.outputs.requiresCombined }}
       timeoutMinutes: ${{ fromJson(needs.unpack_inputs.outputs.timeoutMinutesBuild) }}
       retentionDays: ${{ fromJson(needs.unpack_inputs.outputs.retentionDays) }}
+      checkFreeDiskSpace: ${{ needs.unpack_inputs.outputs.checkFreeDiskSpace }}
+      checkFreeDiskSpaceCustomTargets: ${{ needs.unpack_inputs.outputs.checkFreeDiskSpaceCustomTargets }}
     secrets:
       UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
       UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}

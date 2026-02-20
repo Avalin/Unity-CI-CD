@@ -82,6 +82,10 @@ outputs:
     value: ${{ steps.timeouts.outputs.timeoutMinutesTests }}
   timeoutMinutesBuild:
     value: ${{ steps.timeouts.outputs.timeoutMinutesBuild }}
+  checkFreeDiskSpace:
+    value: ${{ steps.free_disk_space.outputs.checkFreeDiskSpace }}
+  checkFreeDiskSpaceCustomTargets:
+    value: ${{ steps.free_disk_space.outputs.checkFreeDiskSpaceCustomTargets }}
   retentionDays:
     value: ${{ steps.retention.outputs.retentionDays }}
   buildTargets:
@@ -121,6 +125,10 @@ runs:
       with:
         unityVersionInput: ${{ inputs.unityVersionInput }}
         unityVersionRepoVar: ${{ inputs.unityVersionRepoVar }}
+
+    - name: 🗄️ Resolve Free Disk Space Checks
+      id: free_disk_space
+      uses: avalin/unity-ci-cd/.github/actions/resolve-free-disk-space-config@main
 
     - name: ⚙️ Resolve CI Options
       id: ci_options
