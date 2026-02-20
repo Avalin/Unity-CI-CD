@@ -9,7 +9,8 @@
     "useGitLfs": false,
     "quietMode": false,
     "excludeUnityTests": false,
-    "forceCombineArtifacts": false
+    "forceCombineArtifacts": false,
+    "freeDiskSpace": "auto"
   },
   "tests": {
     "editMode": {
@@ -39,7 +40,8 @@
       "StandaloneWindows64",
       "StandaloneOSX",
       "iOS"
-    ]
+    ],
+    "freeDiskSpaceAutoTargets": ["Android"]
   },
   "deploy": {
     "defaultTargets": [

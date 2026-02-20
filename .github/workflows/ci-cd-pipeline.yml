@@ -127,6 +127,8 @@ jobs:
       combineArtifacts: ${{ needs.unpack_inputs.outputs.requiresCombined }}
       timeoutMinutes: ${{ fromJson(needs.unpack_inputs.outputs.timeoutMinutesBuild) }}
       retentionDays: ${{ fromJson(needs.unpack_inputs.outputs.retentionDays) }}
+      freeDiskSpace: 'auto'
+      freeDiskSpaceAutoTargets: '["Android"]'
     secrets:
       UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
       UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
